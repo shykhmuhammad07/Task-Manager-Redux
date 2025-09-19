@@ -12,6 +12,12 @@ function Todo() {
 
   function handleTodo(e) {
     e.preventDefault();
+    if (!todoRef.value) {
+      Swal.fire({
+        icon: "error",
+        title: "Please Enter The Field !",
+      });
+    }
     if (todoRef.current.value.trim() !== "") {
       setIsAdding(true);
       setTimeout(() => {
@@ -49,7 +55,7 @@ function Todo() {
           </h1>
           <p className="subtitle">Organize your day efficiently</p>
         </header>
-        
+
         <div className="stats-bar">
           <div className="stat">
             <span className="stat-number">{todos.length}</span>
@@ -63,12 +69,15 @@ function Todo() {
           </div> */}
         </div>
 
-        <form onSubmit={handleTodo} className={`todo-form ${isAdding ? 'adding' : ''}`}>
+        <form
+          onSubmit={handleTodo}
+          className={`todo-form ${isAdding ? "adding" : ""}`}
+        >
           <div className="input-wrapper">
-            <input 
-              ref={todoRef} 
-              type="text" 
-              placeholder="What needs to be done?" 
+            <input
+              ref={todoRef}
+              type="text"
+              placeholder="What needs to be done?"
               className="todo-input"
             />
             <button type="submit" className="add-button" disabled={isAdding}>
@@ -82,30 +91,42 @@ function Todo() {
           {todos.length > 0 ? (
             <ul className="todo-list">
               {todos.map((todo, index) => (
-                <li 
-                  key={todo.id} 
-                  id={`todo-${todo.id}`}
-                  className="todo-item"
-                >
+                <li key={todo.id} id={`todo-${todo.id}`} className="todo-item">
                   <div className="todo-content">
                     <span className="todo-text">{todo.title}</span>
                     <div className="todo-actions">
-                      <button 
+                      <button
                         onClick={() => handleEdit(todo.id, todo.title)}
                         className="action-button edit-button"
                         aria-label="Edit task"
                       >
-                        <svg className="icon" viewBox="0 0 24 24" width="16" height="16">
-                          <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        <svg
+                          className="icon"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          height="16"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                          />
                         </svg>
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleRemove(todo.id, index)}
                         className="action-button delete-button"
                         aria-label="Delete task"
                       >
-                        <svg className="icon" viewBox="0 0 24 24" width="16" height="16">
-                          <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                        <svg
+                          className="icon"
+                          viewBox="0 0 24 24"
+                          width="16"
+                          height="16"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                          />
                         </svg>
                       </button>
                     </div>
