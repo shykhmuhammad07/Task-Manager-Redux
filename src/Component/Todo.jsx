@@ -12,7 +12,7 @@ function Todo() {
 
   function handleTodo(e) {
     e.preventDefault();
-    if (!todoRef.value) {
+    if (!todoRef) {
       Swal.fire({
         icon: "error",
         title: "Please Enter The Field !",
