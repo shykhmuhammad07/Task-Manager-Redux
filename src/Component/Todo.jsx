@@ -1,4 +1,3 @@
-// Todo.jsx
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo, removeTodo, editTodo } from "../Reducers/todoSlice";
@@ -12,7 +11,7 @@ function Todo() {
 
   function handleTodo(e) {
     e.preventDefault();
-    if (!todoRef) {
+    if (!todoRef.current.value) {
       Swal.fire({
         icon: "error",
         title: "Please Enter The Field !",
